@@ -1,5 +1,22 @@
-var pilihan = 0, randomBot;
-
+var pilihan = 0, scoreUser = 0, randomBot;
+var score = {
+    Menang : 3,
+    Kalah : 0,
+    Seri     : 1,
+    userMenang : function() {
+        scoreUser = scoreUser + this.Menang;
+        return scoreUser;
+    },
+    userKalah : function() {
+        scoreUser = scoreUser + this.Kalah;
+        return scoreUser;
+    },
+    userSeri : function() {
+        scoreUser = scoreUser + this.Seri;
+        return scoreUser;
+    }
+  };
+  console.log();
 function user(pilihan){
     if(pilihan == 1){
         //BatuButton
@@ -17,6 +34,7 @@ function user(pilihan){
         //KertasButton
         alert("user memilih tombol kertas");
         bot();
+        algoritmaPermainan(3);
     }
 }
 function bot(){
@@ -37,37 +55,46 @@ function algoritmaPermainan(pilihan){
         //User memiliih Batu
         if(randomBot == 1){
             //seri
-            alert("User = Batu\nBot = Batu\nSERI!!");
+            score.userSeri();
+            alert("User = Batu\nBot = Batu\nSERI!!\nScore : " + scoreUser);
         }else if(randomBot == 2){
             //user menang
-            alert("User = Batu\nBot = Gunting\nMENANG!!");
+            score.userMenang();
+            alert("User = Batu\nBot = Gunting\nMENANG!!\nScore : " + scoreUser);
         }else if(randomBot == 3){
             //user kalah
-            alert("User = Batu\nBot = Kertas\nKALAH!!");
+            score.userKalah();
+            alert("User = Batu\nBot = Kertas\nKALAH!!\nScore : " + scoreUser);
         }
     }else if(pilihan == 2){
         //User memiliih Gunting
         if(randomBot == 1){
             //user kalah
-            alert("User = Gunting\nBot = Batu\nKALAH!!");
+            score.userKalah();
+            alert("User = Gunting\nBot = Batu\nKALAH!!\nScore : " + scoreUser);
         }else if(randomBot == 2){
             //seri
-            alert("User = Gunting\nBot = Gunting\nSERI!!");
+            score.userSeri();
+            alert("User = Gunting\nBot = Gunting\nSERI!!\nScore : " + scoreUser);
         }else if(randomBot == 3){
             //user emnang
-            alert("User = Gunting\nBot = Kertas\nMENANG!!");
+            score.userMenang();
+            alert("User = Gunting\nBot = Kertas\nMENANG!!\nScore : " + scoreUser);
         }
     }else if(pilihan == 3){
         //User memiliih Kertas
         if(randomBot == 1){
             //user menang
-            alert("User = Kertas\nBot = Batu\nMENANG!!");
+            score.userMenang();
+            alert("User = Kertas\nBot = Batu\nMENANG!!\nScore : " + scoreUser);
         }else if(randomBot == 2){
             //user kalah
-            alert("User = Kertas\nBot = Gunting\nKALAH!!");
+            score.userKalah();
+            alert("User = Kertas\nBot = Gunting\nKALAH!!\nScore : " + scoreUser);
         }else if(randomBot == 3){
             //seri
-            alert("User = Kertas\nBot = Kertas\nSERI!!");
+            score.userSeri();
+            alert("User = Kertas\nBot = Kertas\nSERI!!\nScore : " + scoreUser);
         }
     }
 }
