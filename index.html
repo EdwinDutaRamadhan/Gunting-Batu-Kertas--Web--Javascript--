@@ -8,25 +8,44 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <title>Gunting Batu Kertas</title>
 </head>
-<body>
-    
+<body> 
     <div style="padding: 2%;">
       <div class="canvas-board">
         <div class="column-header">
           <div  class="canvas-score-user">
             <p id="score-user" style="text-align: center;">0</p>
           </div>
+          <div class="pertandingan-ke">
+                <h3>STAGE</h3>
+          </div>
         </div>
         <div class="column-header">
+          <div class="stage">
+                <h3 id="pertandingan-ke">0</h3>
+          </div>
           <div  class="canvas-score-bot">
             <p id="score-bot" style="text-align: center;">0</p>
           </div>
         </div>        
-        <div class="img-user">
-          <img src="" alt="" id="display-user">
+        <div style="min-height: 270px;">
+          <div class="img-user">
+            <img src="" alt="" id="display-user">
+          </div>
+          <div class="img-user">
+            <img src="" alt="" id="display-bot">
+          </div>
         </div>
-        <div class="img-user">
-          <img src="" alt="" id="display-bot">
+        <div class="layout-footer-canvas">
+          <div class="footer-canvas user-profile">
+            <p>User Profile</p>
+          </div>
+          <div class="footer-canvas score-panel">
+            <h2 id="prompt-panel"></h2>
+            <h4 id="score-panel"></h4>
+          </div>
+          <div class="footer-canvas bot-profile">
+            <p>Bot Profile</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
-var pilihan = 0, scoreUser = 0,scoreBot = 0, randomBot;
-
+var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot;
 var score = {
     Menang : 3,
     Kalah : 0,
@@ -7,6 +6,14 @@ var score = {
     Win : "Menang",
     Lose : "Kalah",
     Draw : "Seri",
+    WinPoint : "+3",
+    LosePoint : "+0",
+    DrawPoint : "+1",
+    PanelWin : "YOU WIN",
+    PanelLose : "YOU LOSE",
+    PanelDraw : "DRAW",
+    PromptPanel : "prompt-panel",
+    ScorePanel : "score-panel",
     userValue : function(kondisi){
         if(kondisi == this.Win){
             scoreUser = scoreUser + this.Menang;
@@ -30,6 +37,18 @@ var score = {
             scoreBot = scoreBot + this.Seri;
             return scoreBot;
         }
+    },
+    panelPrompt : function(kondisi){
+        if(kondisi == this.Win){
+            document.getElementById(this.PromptPanel).innerHTML = this.PanelWin;
+            document.getElementById(this.ScorePanel).innerHTML = this.WinPoint;
+        }else if(kondisi == this.Lose){
+            document.getElementById(this.PromptPanel).innerHTML = this.PanelLose;
+            document.getElementById(this.ScorePanel).innerHTML = this.LosePoint;
+        }else if(kondisi = this.Draw){
+            document.getElementById(this.PromptPanel).innerHTML = this.PanelDraw;
+            document.getElementById(this.ScorePanel).innerHTML = this.DrawPoint;
+        }
     }
   };
 var cetak = {
@@ -37,6 +56,7 @@ var cetak = {
     ScoreBot : "score-bot",
     User : "display-user",
     Bot : "display-bot",
+    Stage : "pertandingan-ke",
     Scrissors : "Gunting",
     Rock : "Batu",
     Paper : "Kertas",
@@ -67,6 +87,9 @@ var cetak = {
         }else if(kondisi == this.Paper){
             document.getElementById(this.Bot).src = this.BotKertas;
         }
+    },
+    setStage : function(){
+        document.getElementById(this.Stage).innerHTML = stage;
     }
 };
 function user(pilihan){
@@ -91,9 +114,11 @@ function bot(){
 }
 function algoritmaPermainan(pilihan){
     if(pilihan == 1){
+        stage++;
         //User memiliih Batu
         if(randomBot == 1){
             //seri
+            score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Rock);
             score.userValue(score.Draw);
@@ -102,6 +127,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Batu\nBot = Batu\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user menang
+            score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Scrissors);
             score.userValue(score.Win);
@@ -110,6 +136,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Batu\nBot = Gunting\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //user kalah
+            score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Paper);
             score.userValue(score.Lose);
@@ -117,10 +144,13 @@ function algoritmaPermainan(pilihan){
             cetak.scoreValue();
             //alert("User = Batu\nBot = Kertas\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
+        cetak.setStage();
     }else if(pilihan == 2){
+        stage++;
         //User memiliih Gunting
         if(randomBot == 1){
             //user kalah
+            score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Rock);
             score.userValue(score.Lose);
@@ -129,6 +159,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Gunting\nBot = Batu\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //seri
+            score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Scrissors);
             score.userValue(score.Draw);
@@ -137,6 +168,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Gunting\nBot = Gunting\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //user emnang
+            score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Paper);
             score.userValue(score.Win);
@@ -144,10 +176,13 @@ function algoritmaPermainan(pilihan){
             cetak.scoreValue();
             //alert("User = Gunting\nBot = Kertas\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
+        cetak.setStage();
     }else if(pilihan == 3){
+        stage++;
         //User memiliih Kertas
         if(randomBot == 1){
             //user menang
+            score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Rock);
             score.userValue(score.Win);
@@ -156,6 +191,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Kertas\nBot = Batu\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user kalah
+            score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Scrissors);
             score.userValue(score.Lose);
@@ -164,6 +200,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Kertas\nBot = Gunting\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //seri
+            score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Paper);
             score.userValue(score.Draw);
@@ -171,5 +208,6 @@ function algoritmaPermainan(pilihan){
             cetak.scoreValue();
             //alert("User = Kertas\nBot = Kertas\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
+        cetak.setStage();
     }
 }
