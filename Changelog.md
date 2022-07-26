@@ -9,3 +9,5 @@ V0.2 -- 20.50 WIB 22/07/2022 -- Algoritm Added
 V0.3 -- 18.40 WIB 23/07/2022 -- User Score Added
 
 V0.4 -- 13.32 WIB 24/07/2022 -- Score Board Added
+
+V0.5 -- 16.22 WIB 24/07/2022 -- Hand Display add (Delete Alert Method)
