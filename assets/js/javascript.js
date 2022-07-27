@@ -1,5 +1,11 @@
 var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot;
 var score = {
+    UserWin : 0,
+    UserLose : 0,
+    UserDraw : 0,
+    BotWin : 0,
+    BotLose : 0,
+    BotDraw : 0,
     Menang : 3,
     Kalah : 0,
     Seri     : 1,
@@ -14,6 +20,12 @@ var score = {
     PanelDraw : "DRAW",
     PromptPanel : "prompt-panel",
     ScorePanel : "score-panel",
+    UserWinInfo : "user-win",
+    UserLoseInfo : "user-lose",
+    UserDrawInfo : "user-draw",
+    BotWinInfo : "bot-win",
+    BotLoseInfo : "bot-lose",
+    BotDrawInfo : "bot-draw",
     userValue : function(kondisi){
         if(kondisi == this.Win){
             scoreUser = scoreUser + this.Menang;
@@ -40,14 +52,26 @@ var score = {
     },
     panelPrompt : function(kondisi){
         if(kondisi == this.Win){
+            this.UserWin++;
+            this.BotLose++;
             document.getElementById(this.PromptPanel).innerHTML = this.PanelWin;
             document.getElementById(this.ScorePanel).innerHTML = this.WinPoint;
+            document.getElementById(this.UserWinInfo).innerHTML = "WIN &ensp;&ensp;: " + this.UserWin;
+            document.getElementById(this.BotLoseInfo).innerHTML = this.BotLose + " :&ensp; LOSE";
         }else if(kondisi == this.Lose){
+            this.UserLose++;
+            this.BotWin++;
             document.getElementById(this.PromptPanel).innerHTML = this.PanelLose;
             document.getElementById(this.ScorePanel).innerHTML = this.LosePoint;
+            document.getElementById(this.UserLoseInfo).innerHTML = "LOSE &ensp;: " + this.UserLose;
+            document.getElementById(this.BotWinInfo).innerHTML = this.BotWin + " :&ensp;&ensp; WIN";
         }else if(kondisi = this.Draw){
+            this.UserDraw++;
+            this.BotDraw++;
             document.getElementById(this.PromptPanel).innerHTML = this.PanelDraw;
             document.getElementById(this.ScorePanel).innerHTML = this.DrawPoint;
+            document.getElementById(this.UserDrawInfo).innerHTML = "DRAW : " + this.UserDraw;
+            document.getElementById(this.BotDrawInfo).innerHTML = this.BotDraw + " : DRAW";
         }
     }
   };
@@ -97,18 +121,22 @@ function user(pilihan){
         //BatuButton
         bot();
         algoritmaPermainan(1);
+        alertPromt();
     }
     else if(pilihan == 2){
         //GuntingButton
         bot();
         algoritmaPermainan(2);
+        alertPromt();
     }
     else if(pilihan == 3){
         //KertasButton
         bot();
         algoritmaPermainan(3);
+        alertPromt();
     }
 }
+
 function bot(){
     randomBot = Math.floor(Math.random()* 3) + 1;
 }
@@ -209,5 +237,16 @@ function algoritmaPermainan(pilihan){
             //alert("User = Kertas\nBot = Kertas\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
         cetak.setStage();
+    }
+}
+function alertPromt(){
+    if(stage % 10 == 0){
+        if(scoreUser > scoreBot){
+            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Unggul");
+        }else if(scoreBot > scoreUser){
+            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Tertinggal");
+        }else if(scoreUser == scoreBot){
+            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nSeimbang");
+        }
     }
 }
