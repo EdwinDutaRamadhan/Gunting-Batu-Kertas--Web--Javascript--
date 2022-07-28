@@ -1,4 +1,5 @@
 var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot;
+
 var score = {
     UserWin : 0,
     UserLose : 0,
@@ -116,24 +117,44 @@ var cetak = {
         document.getElementById(this.Stage).innerHTML = stage;
     }
 };
+var utility = {
+    WinCondition : "WIN",
+    LoseCondition : "LOSE",
+    DrawCondition : "DRAW",
+    ButtonClicked : "./assets/mp3/button-clicked.mp3",
+    WinSound : "./assets/mp3/win-sound.mp3",
+    LoseSound : "./assets/mp3/lose-sound.mp3",
+    DrawSound : "./assets/mp3/draw-sound.mp3",
+    ButtonClickedID : "button-clicked",
+    SoundNotifID: "notification-sound",
+    buttonClicked : function(){
+        document.getElementById(this.ButtonClickedID).src = this.ButtonClicked;
+    },
+    soundEffect : function(kondisi){
+        if(kondisi == this.WinCondition){
+            document.getElementById(this.SoundNotifID).src = this.WinSound;
+        }else if(kondisi == this.LoseCondition){
+            document.getElementById(this.SoundNotifID).src = this.LoseSound;
+        }else if(kondisi = this.DrawCondition){
+            document.getElementById(this.SoundNotifID).src = this.DrawSound;
+        }
+    }
+};
 function user(pilihan){
     if(pilihan == 1){
         //BatuButton
         bot();
         algoritmaPermainan(1);
-        alertPromt();
     }
     else if(pilihan == 2){
         //GuntingButton
         bot();
         algoritmaPermainan(2);
-        alertPromt();
     }
     else if(pilihan == 3){
         //KertasButton
         bot();
         algoritmaPermainan(3);
-        alertPromt();
     }
 }
 
@@ -143,9 +164,11 @@ function bot(){
 function algoritmaPermainan(pilihan){
     if(pilihan == 1){
         stage++;
+        utility.buttonClicked();
         //User memiliih Batu
         if(randomBot == 1){
             //seri
+            utility.soundEffect(utility.DrawCondition);
             score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Rock);
@@ -155,6 +178,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Batu\nBot = Batu\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user menang
+            utility.soundEffect(utility.WinCondition);
             score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Scrissors);
@@ -164,6 +188,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Batu\nBot = Gunting\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //user kalah
+            utility.soundEffect(utility.LoseCondition);
             score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Rock);
             cetak.setImageBot(cetak.Paper);
@@ -175,9 +200,11 @@ function algoritmaPermainan(pilihan){
         cetak.setStage();
     }else if(pilihan == 2){
         stage++;
+        utility.buttonClicked();
         //User memiliih Gunting
         if(randomBot == 1){
             //user kalah
+            utility.soundEffect(utility.LoseCondition);
             score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Rock);
@@ -187,6 +214,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Gunting\nBot = Batu\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //seri
+            utility.soundEffect(utility.DrawCondition);
             score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Scrissors);
@@ -196,6 +224,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Gunting\nBot = Gunting\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //user emnang
+            utility.soundEffect(utility.WinCondition)
             score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Scrissors);
             cetak.setImageBot(cetak.Paper);
@@ -207,9 +236,11 @@ function algoritmaPermainan(pilihan){
         cetak.setStage();
     }else if(pilihan == 3){
         stage++;
+        utility.buttonClicked();
         //User memiliih Kertas
         if(randomBot == 1){
             //user menang
+            utility.soundEffect(utility.WinCondition);
             score.panelPrompt(score.Win);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Rock);
@@ -219,6 +250,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Kertas\nBot = Batu\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user kalah
+            utility.soundEffect(utility.LoseCondition);
             score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Scrissors);
@@ -228,6 +260,7 @@ function algoritmaPermainan(pilihan){
             //alert("User = Kertas\nBot = Gunting\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //seri
+            utility.soundEffect(utility.DrawCondition);
             score.panelPrompt(score.Draw);
             cetak.setImageUser(cetak.Paper);
             cetak.setImageBot(cetak.Paper);
@@ -240,7 +273,7 @@ function algoritmaPermainan(pilihan){
     }
 }
 function alertPromt(){
-    if(stage % 10 == 0){
+    if(stage == 11 || stage == 21 || stage == 31){
         if(scoreUser > scoreBot){
             alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Unggul");
         }else if(scoreBot > scoreUser){
