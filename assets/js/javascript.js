@@ -273,7 +273,7 @@ function algoritmaPermainan(pilihan){
     }
 }
 function alertPromt(){
-    if(stage == 11 || stage == 21 || stage == 31){
+    if(stage == 11 || stage == 21){
         if(scoreUser > scoreBot){
             alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Unggul");
         }else if(scoreBot > scoreUser){
