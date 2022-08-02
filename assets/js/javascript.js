@@ -1,4 +1,5 @@
 var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot;
+repeat = true;
 
 var score = {
     UserWin : 0,
@@ -140,21 +141,75 @@ var utility = {
         }
     }
 };
+function popupFunctionUser() {
+    var popup = document.getElementById("myPopupUser");
+    popup.classList.toggle("show");
+}
+function popupFunctionBot() {
+    var popup = document.getElementById("myPopupBot");
+    popup.classList.toggle("show");
+}
+var botExpression = {
+    BotExpression1 : "Menang ",
+    BotExpression2 : "Kalah ",
+    BotExpression3 : "Hooh",
+    WinExpression : function(){
+        document.getElementById("myPopupBot").innerHTML = this.BotExpression1 + score.BotWin + " kali ni";
+    },
+    LoseExpression : function(){
+        document.getElementById("myPopupBot").innerHTML = this.BotExpression2 + score.BotWin + " ?";
+    }
+}
+var userExpression = {
+    UserExpression1 : "Menang ",
+    UserExpression2 : "Kalah ",
+    UserExpression3 : "Hooh",
+    UserExpression4 : "Hehe",
+    UserExpression5 : "Haha",
+    WinExpression : function(){
+        document.getElementById("myPopupUser").innerHTML = this.UserExpression1 + score.UserWin + " kali ni";
+    },
+    LoseExpression : function(){
+        document.getElementById("myPopupUser").innerHTML = this.UserExpression2 + score.UserWin + " ?";
+    }
+}
+function userRandomExpression(){
+    if(stage % 10 == 0 && stage != 0){
+        userExpression.LoseExpression();
+        popupFunctionUser();
+    }else if(stage % 4 == 0){
+        if(scoreBot != 0 && score.BotWin != 0){
+            botExpression.WinExpression();
+            popupFunctionBot();
+        }
+    }else if(stage % 5 == 0){
+        if(scoreUser != 0 && score.UserWin != 0){
+            userExpression.WinExpression();
+            popupFunctionUser();
+        }
+    }else if(stage % 6 == 0){
+        botExpression.LoseExpression();
+        popupFunctionBot();
+    }
+}
 function user(pilihan){
     if(pilihan == 1){
         //BatuButton
         bot();
         algoritmaPermainan(1);
+        userRandomExpression();
     }
     else if(pilihan == 2){
         //GuntingButton
         bot();
         algoritmaPermainan(2);
+        userRandomExpression();
     }
     else if(pilihan == 3){
         //KertasButton
         bot();
         algoritmaPermainan(3);
+        userRandomExpression();
     }
 }
 
