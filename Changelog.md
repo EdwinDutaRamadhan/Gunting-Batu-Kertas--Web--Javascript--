@@ -17,3 +17,5 @@ V0.6 -- 23.00 WIB 26/07/2022 -- Condition Panel Added (You Win, Draw, You Lose)
 V0.7 -- 16.00 WIB 27/07/2022 -- User & Bot Profile Added
 
 V0.8 -- 13.24 WIB 28/07/2022 -- Sound Added
+
+V0.9 -- 15.49 WIB 02/08/2022 -- Expression Add
