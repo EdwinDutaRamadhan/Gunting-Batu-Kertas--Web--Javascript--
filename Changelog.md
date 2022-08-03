@@ -19,3 +19,5 @@ V0.7 -- 16.00 WIB 27/07/2022 -- User & Bot Profile Added
 V0.8 -- 13.24 WIB 28/07/2022 -- Sound Added
 
 V0.9 -- 15.49 WIB 02/08/2022 -- Expression Add
+
+V1.0 -- 16.28 WIB 03/08/2022 -- Add Hamburger Menu (FINAL)
