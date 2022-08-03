@@ -9,6 +9,19 @@
     <title>Gunting Batu Kertas</title>
 </head>
 <body> 
+  <div class="hamburger-menu">
+    <input id="menu__toggle" type="checkbox" />
+    <label class="menu__btn" for="menu__toggle">
+      <span></span>
+    </label>
+    <ul class="menu__box">
+      <li><a class="menu__item" href="#">About</a></li>
+			<li><a class="menu__item" href="#" id="profile-menu" onclick="userProfileClicked();" >User Profile : Boy</a></li>
+			<li><a class="menu__item" href="#" id="bot-menu" onclick="botProfileClicked();" >Bot Profile : Bot 1</a></li>
+			<li><a class="menu__item" href="#" id="music" onclick="musicButton();">Music : On</a></li>
+			<li><a class="menu__item" href="#" id="music-list" onclick="musicList();">Battle Screen</a></li>
+    </ul>
+  </div>
     <div style="padding: 2%;">
       <div class="canvas-board">
         <div class="column-header">
@@ -63,7 +76,7 @@
       </div>
         <div class="layout-footer-canvas">
           <div class="footer-canvas user-profile">
-              <img src="./assets/img/icon/user-boy.png" class="user-icon-canvas" alt="browser/device anda kentang">
+              <img src="./assets/img/icon/user-boy.png" id="user-profile-img" class="user-icon-canvas" alt="browser/device anda kentang">
               <div class="user-info">
                 <h4 id="user-name" style="max-height: 15px;">User</h4>
                   <p class="info" id="user-win">WIN &ensp;&ensp;: 0</p>
@@ -76,7 +89,7 @@
             <h4 id="score-panel"></h4>
           </div>
           <div class="footer-canvas bot-profile">
-            <img src="./assets/img/icon/bot-1.png" class="bot-icon-canvas">
+            <img src="./assets/img/icon/bot-1.png" id="bot-profile-img" class="bot-icon-canvas">
             <div class="bot-info">
                 <h4 style="max-height: 15px;">Bot</h4>
                 <p class="info" id="bot-win">0 :&ensp;&ensp; WIN</p>
@@ -87,7 +100,7 @@
         </div>
       </div>
     </div>
-    <audio src="/assets/mp3/Lost Saga - Battle Screen.mp3" autoplay loop></audio>
+    <audio src="/assets/mp3/Lost Saga - Battle Screen.mp3" id="backsounds" autoplay loop></audio>
     <audio src="" id="button-clicked" autoplay></audio>
     <audio src="./" id="notification-sound" autoplay></audio>
   <!--=========================  Button Batu  =========================-->

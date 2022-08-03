@@ -1,5 +1,7 @@
-var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot;
-repeat = true;
+var pilihan = 0, scoreUser = 0,scoreBot = 0, stage = 0, randomBot,repeater = 0,musicClicked = 1,userClicked = 1, botClicked = 1;
+let username = prompt("Masukkan Nama Anda : ", "Edwin");
+const stageGame = prompt("Ingin bermain berapa stage ? ", 10);
+document.getElementById("user-name").innerHTML = username;
 
 var score = {
     UserWin : 0,
@@ -67,7 +69,7 @@ var score = {
             document.getElementById(this.ScorePanel).innerHTML = this.LosePoint;
             document.getElementById(this.UserLoseInfo).innerHTML = "LOSE &ensp;: " + this.UserLose;
             document.getElementById(this.BotWinInfo).innerHTML = this.BotWin + " :&ensp;&ensp; WIN";
-        }else if(kondisi = this.Draw){
+        }else if(kondisi == this.Draw){
             this.UserDraw++;
             this.BotDraw++;
             document.getElementById(this.PromptPanel).innerHTML = this.PanelDraw;
@@ -78,6 +80,7 @@ var score = {
     }
   };
 var cetak = {
+    DefaultName : "Edwin Duta Ramadhan",
     ScoreUser : "score-user",
     ScoreBot : "score-bot",
     User : "display-user",
@@ -152,7 +155,6 @@ function popupFunctionBot() {
 var botExpression = {
     BotExpression1 : "Menang ",
     BotExpression2 : "Kalah ",
-    BotExpression3 : "Hooh",
     WinExpression : function(){
         document.getElementById("myPopupBot").innerHTML = this.BotExpression1 + score.BotWin + " kali ni";
     },
@@ -163,9 +165,6 @@ var botExpression = {
 var userExpression = {
     UserExpression1 : "Menang ",
     UserExpression2 : "Kalah ",
-    UserExpression3 : "Hooh",
-    UserExpression4 : "Hehe",
-    UserExpression5 : "Haha",
     WinExpression : function(){
         document.getElementById("myPopupUser").innerHTML = this.UserExpression1 + score.UserWin + " kali ni";
     },
@@ -198,21 +197,34 @@ function user(pilihan){
         bot();
         algoritmaPermainan(1);
         userRandomExpression();
+        finishGame();
     }
     else if(pilihan == 2){
         //GuntingButton
         bot();
         algoritmaPermainan(2);
         userRandomExpression();
+        finishGame();
     }
     else if(pilihan == 3){
         //KertasButton
         bot();
         algoritmaPermainan(3);
         userRandomExpression();
+        finishGame();
     }
 }
-
+function finishGame(){
+    if(stage == stageGame){
+        alert("SCORE : " + scoreUser + "\nWIN : " + score.UserWin + "\nLOSE : " + score.UserLose + "\nDraw : " + score.UserDraw );
+        var lagi = confirm("Apakah anda ingin bermain lagi?");
+        if(lagi == true){
+            window.location.reload(true);
+        }else{
+            window.open("https://2.bp.blogspot.com/-BjidtXjcBWQ/Wh2x23CdDsI/AAAAAAAAAE0/rxuAfsVF8_g_KAHHeOwOB0E2NOMq4GZMgCLcBGAs/s400/Terima-Kasih.gif");
+        }
+    }
+}
 function bot(){
     randomBot = Math.floor(Math.random()* 3) + 1;
 }
@@ -230,7 +242,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Draw);
             score.botValue(score.Draw);
             cetak.scoreValue();
-            //alert("User = Batu\nBot = Batu\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user menang
             utility.soundEffect(utility.WinCondition);
@@ -240,9 +251,8 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Win);
             score.botValue(score.Lose);
             cetak.scoreValue();
-            //alert("User = Batu\nBot = Gunting\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
-        }else if(randomBot == 3){
             //user kalah
+        }else if(randomBot == 3){
             utility.soundEffect(utility.LoseCondition);
             score.panelPrompt(score.Lose);
             cetak.setImageUser(cetak.Rock);
@@ -250,7 +260,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Lose);
             score.botValue(score.Win);
             cetak.scoreValue();
-            //alert("User = Batu\nBot = Kertas\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
         cetak.setStage();
     }else if(pilihan == 2){
@@ -266,7 +275,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Lose);
             score.botValue(score.Win);
             cetak.scoreValue();
-            //alert("User = Gunting\nBot = Batu\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //seri
             utility.soundEffect(utility.DrawCondition);
@@ -276,7 +284,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Draw);
             score.botValue(score.Draw);
             cetak.scoreValue();
-            //alert("User = Gunting\nBot = Gunting\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //user emnang
             utility.soundEffect(utility.WinCondition)
@@ -286,7 +293,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Win);
             score.botValue(score.Lose);
             cetak.scoreValue();
-            //alert("User = Gunting\nBot = Kertas\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
         cetak.setStage();
     }else if(pilihan == 3){
@@ -302,7 +308,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Win);
             score.botValue(score.Lose);
             cetak.scoreValue();
-            //alert("User = Kertas\nBot = Batu\nMENANG!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 2){
             //user kalah
             utility.soundEffect(utility.LoseCondition);
@@ -312,7 +317,6 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Lose);
             score.botValue(score.Win);
             cetak.scoreValue();
-            //alert("User = Kertas\nBot = Gunting\nKALAH!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }else if(randomBot == 3){
             //seri
             utility.soundEffect(utility.DrawCondition);
@@ -322,19 +326,64 @@ function algoritmaPermainan(pilihan){
             score.userValue(score.Draw);
             score.botValue(score.Draw);
             cetak.scoreValue();
-            //alert("User = Kertas\nBot = Kertas\nSERI!!\nScore User : " + scoreUser + "\nScore Bot : " + scoreBot);
         }
         cetak.setStage();
     }
 }
-function alertPromt(){
-    if(stage == 11 || stage == 21){
-        if(scoreUser > scoreBot){
-            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Unggul");
-        }else if(scoreBot > scoreUser){
-            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nAnda Tertinggal");
-        }else if(scoreUser == scoreBot){
-            alert("Stage : "+ stage +"\nUser : " + scoreUser + "\nBot : " + scoreBot + "\nSeimbang");
-        }
+function musicButton(){
+    if(repeater % 2 == 0){
+        //musicOff
+        document.getElementById("backsounds").muted = true;
+        document.getElementById("music").innerHTML = "Music : Off";
+    }else if(repeater % 2 == 1){
+         //musicOn
+        document.getElementById("backsounds").muted = false;
+        document.getElementById("music").innerHTML = "Music : On";
     }
+    repeater++;
+}
+
+function musicList(){
+    const MusicSource = [];
+    MusicSource[1] = "/assets/mp3/Lost Saga - Battle Screen.mp3";
+    MusicSource[2] = "/assets/mp3/Lost Saga - Boot Camp.mp3";
+    MusicSource[3] = "/assets/mp3/Lost Saga - Cube.mp3";
+    MusicSource[4] = "/assets/mp3/Lost Saga - Enchanted Forest.mp3";    
+    MusicSource[5] = "/assets/mp3/Lost Saga - Wild West.mp3";
+    const MusicTitle = [];
+    MusicTitle[1] = "Battle Screen";
+    MusicTitle[2] = "Boot Camp";
+    MusicTitle[3] = "Cube";
+    MusicTitle[4] = "Enchanted Forest";
+    MusicTitle[5] = "Wild West";
+    musicClicked++;
+    
+    document.getElementById("backsounds").src = MusicSource[musicClicked];
+    document.getElementById("music-list").innerHTML = MusicTitle[musicClicked];
+    if(musicClicked == 5){musicClicked = 0;}
+}
+function userProfileClicked(){
+    userClicked++;
+    const UserSource = [];
+    UserSource[1] = "./assets/img/icon/user-boy.png";
+    UserSource[2] = "./assets/img/icon/user-girl.png";
+    const UserTitle = [];
+    UserTitle[1] = "User Profile : Boy";
+    UserTitle[2] = "User Profile : Girl";
+    document.getElementById("user-profile-img").src = UserSource[userClicked];
+    document.getElementById("profile-menu").innerHTML = UserTitle[userClicked];
+    if(userClicked == 2){userClicked = 0;}
+}
+function botProfileClicked(){
+    botClicked++;
+    const BotSource = [];
+    BotSource[1] = "./assets/img/icon/bot-1.png";
+    BotSource[2] = "./assets/img/icon/bot-2.png";
+    const BotTitle = [];
+    BotTitle[1] = "Bot Profile : Bot 1";
+    BotTitle[2] = "Bot Profile : Bot 2";
+    document.getElementById("bot-profile-img").src = BotSource[botClicked];
+    document.getElementById("bot-menu").innerHTML =BotTitle[botClicked];
+    if(botClicked == 2){botClicked = 0;}
+    console.log(botClicked);
 }
